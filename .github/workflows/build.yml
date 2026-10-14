@@ -31,7 +31,8 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      # --ignore-scripts : évite la compilation inutile de better-sqlite3 (binaires précompilés fournis).
+      - run: npm ci --ignore-scripts
       - run: npm run lint
 
   # ── Image Docker → GHCR ──────────────────────────────────

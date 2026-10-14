@@ -5,10 +5,12 @@ FROM node:22-bookworm-slim AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# ── Dépendances (better-sqlite3 fournit ses binaires précompilés, pas de compilation) ──
+# ── Dépendances ──────────────────────────────────────────────
+# better-sqlite3 embarque ses binaires précompilés (prebuilds/), mais npm 10 lance quand même
+# `node-gyp rebuild` à cause de son binding.gyp. Aucun paquet n'a besoin de scripts d'installation.
 FROM base AS deps
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 # ── Build Next.js (sortie standalone) ────────────────────────
 FROM base AS build
