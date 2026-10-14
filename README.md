@@ -47,14 +47,14 @@ Le workflow [.github/workflows/build.yml](.github/workflows/build.yml) :
 
 | Nom | Type | Rôle |
 |---|---|---|
-| `PORTAINER_WEBHOOK_URL` | Secret | URL du webhook de la stack Portainer |
-| `TIMEZONE` | Variable (optionnelle) | Fuseau des dates, figé au build (défaut `America/Toronto`) |
+| `PORTAINER_WEBHOOK_URL` | Secret | URL du webhook de la stack Portainer || `TIMEZONE` | Variable (optionnelle) | Fuseau des dates, figé au build (défaut `America/Toronto`) |
 
 Côté Portainer :
 
 - Créer une stack à partir de [docker-compose.yml](docker-compose.yml) et renseigner `ADMIN_USERNAME`, `ADMIN_PASSWORD`
   (et `COOKIE_SECURE=false` si le site n'est pas en HTTPS, sinon la connexion admin échouera).
 - Activer le webhook de la stack avec l'option **re-pull image**, et copier son URL dans le secret GitHub.
+- Portainer étant en certificat auto-signé, le webhook est appelé sans vérification du certificat (`curl --insecure`).
 - Si le package GHCR est privé, ajouter le registre `ghcr.io` dans Portainer (identifiant GitHub + token avec `read:packages`).
 
 La base vit dans le volume `registre-data` (`/app/data/registre.db`) : elle survit aux mises à jour de l'image.
