@@ -4,7 +4,7 @@
 #   ADMIN_USERNAME   premier admin, créé seulement si aucun admin n'existe
 #   ADMIN_PASSWORD   son mot de passe (8 caractères min.)
 #   COOKIE_SECURE    false si le site est servi en HTTP simple (défaut : true, HTTPS)
-#   PORT_HTTP        port exposé sur l'hôte (défaut : 3000)
+#   PORT_HTTP        port exposé sur l'hôte (défaut : 40520)
 
 services:
   registre:
@@ -12,7 +12,7 @@ services:
     container_name: registre-sahp
     restart: unless-stopped
     ports:
-      - "${PORT_HTTP:-3000}:3000"
+      - "${PORT_HTTP:-40520}:40520"
     environment:
       ADMIN_USERNAME: ${ADMIN_USERNAME:-}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
