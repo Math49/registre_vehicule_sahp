@@ -68,7 +68,8 @@ docker exec -it registre-sahp node scripts/create-admin.mjs admin.nom
 
 - **Plaque** : exactement 8 caractères `[A-Z0-9 ]`, espaces conservés, majuscules automatiques, non unique.
 - **N° de série** : entier unique, sans limite de chiffres (stocké en texte, zéros de tête retirés, tri numérique).
-- **Création publique** limitée à 10 enregistrements réussis / 10 min par IP ; connexion limitée à 10 tentatives / 10 min.
+- **Création** : 10 enregistrements réussis / minute par IP pour les visiteurs, aucune limite pour un admin connecté.
+  Connexion limitée à 10 tentatives / 10 min.
   Derrière un reverse proxy, celui-ci doit transmettre `X-Forwarded-For`.
 - Un admin ne peut pas supprimer son propre compte (vérifié côté serveur).
 - Sessions : cookie httpOnly, 7 jours, mots de passe hashés en scrypt.
